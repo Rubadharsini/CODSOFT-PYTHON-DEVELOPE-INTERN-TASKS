@@ -1,1 +1,57 @@
 
+class Contact:
+    def __init__(self, name, phone, email):
+        self.name = name
+        self.phone = phone
+        self.email = email
+
+def display_contacts(contact_list):
+    if not contact_list:
+        print("Your contact book is empty.")
+    else:
+        print("Contact List:")
+        for i, contact in enumerate(contact_list, 1):
+            print(f"{i}. {contact.name} - Phone: {contact.phone}, Email: {contact.email}")
+
+def add_contact(contact_list, name, phone, email):
+    new_contact = Contact(name, phone, email)
+    contact_list.append(new_contact)
+    print(f"Contact '{name}' added to your contact book.")
+
+def search_contact(contact_list, search_name):
+    for contact in contact_list:
+        if contact.name.lower() == search_name.lower():
+            print(f"Contact found: {contact.name} - Phone: {contact.phone}, Email: {contact.email}")
+            return
+    print(f"No contact found with the name '{search_name}'.")
+
+def main():
+    contacts = []
+
+    while True:
+        print("\nOptions:")
+        print("1. Display contacts")
+        print("2. Add contact")
+        print("3. Search contact")
+        print("4. Quit")
+
+        choice = input("Enter your choice (1-4): ")
+
+        if choice == "1":
+            display_contacts(contacts)
+        elif choice == "2":
+            name = input("Enter contact name: ")
+            phone = input("Enter contact phone number: ")
+            email = input("Enter contact email address: ")
+            add_contact(contacts, name, phone, email)
+        elif choice == "3":
+            search_name = input("Enter the name to search: ")
+            search_contact(contacts, search_name)
+        elif choice == "4":
+            print("Exiting the contact book. Goodbye!")
+            break
+        else:
+            print("Invalid choice. Please enter a number between 1 and 4.")
+
+if __name__ == "__main__":
+    main()
